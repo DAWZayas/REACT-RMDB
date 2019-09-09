@@ -1,3 +1,10 @@
 import React from "react";
+import Header from "../layout/Header";
+import Home from "../pages/Home";
 
-export const App: React.FC = () => <p>Hello from APP</p>;
+export const App: React.FC = () => (
+  <div>
+    <Header />
+    <Home />
+  </div>
+);
