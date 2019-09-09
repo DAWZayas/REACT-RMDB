@@ -1,7 +1,9 @@
 @import "abstracts/variables";
 
+@import "base/animations";
 @import "base/base";
 
-@import "components/Spinner";
+@import "components/heroimage";
+@import "components/spinner";
 
-@import "layout/Header"
+@import "layout/header"
