@@ -7,14 +7,31 @@ import SearchBar from "../components/SearchBar";
 import Spinner from "../components/Spinner";
 
 export default class Home extends Component {
+  state = {
+    movies: [],
+    heroImage: null,
+    loading: false,
+    currentPage: 0,
+    totalPages: 0,
+    searchTerm: ""
+  };
+
+  componentDidMount() {
+    this.setState({ loading: true });
+  }
+
   render() {
+    const { loading } = this.state;
     return (
       <div className="home">
         <HeroImage />
         <SearchBar />
         <FourColGrid />
         <MovieThumb />
-        <Spinner />
+        <button onClick={() => this.setState({ loading: !loading })}>
+          Toggle spinner
+        </button>
+        {loading ? <Spinner /> : null}
         <LoadMoreBtn />
       </div>
     );
