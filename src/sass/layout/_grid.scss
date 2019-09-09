@@ -1,0 +1,30 @@
+.grid {
+  h1 {
+    font-family: 'Abel', sans-serif;
+    font-size: 4.2rem;
+  }
+
+  &__element {
+    animation: fadein 0.5s;
+  }
+}
+
+.row {
+  max-width: $grid-width;
+  margin: 0 auto;
+
+  &:not(:last-child) {
+    margin-bottom: $gutter-vertical;
+  }
+
+  @include clearfix;
+  @include colwidth;
+
+  [class^="col-"] {
+    float: left;
+
+    &:not(:last-child) {
+      margin-right: $gutter-horizontal;
+    }
+  }
+}

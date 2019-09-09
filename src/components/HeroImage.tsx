@@ -1,6 +1,6 @@
 import React from "react";
 
-const HeroImage: React.FC<HeroImage> = ({ image, title, text }) => {
+const HeroImage: React.FC<Movie> = ({ image, title, text }) => {
   return (
     <div
       className="hero-image"

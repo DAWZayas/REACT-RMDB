@@ -1,3 +1,5 @@
+@import "abstracts/functions";
+@import "abstracts/mixins";
 @import "abstracts/variables";
 
 @import "base/animations";
@@ -5,7 +7,9 @@
 
 @import "components/font_awesome";
 @import "components/heroimage";
+@import "components/moviethumb";
 @import "components/searchbar";
 @import "components/spinner";
 
+@import "layout/grid";
 @import "layout/header"

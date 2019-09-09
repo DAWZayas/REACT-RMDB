@@ -1,6 +1,6 @@
 type HomeState = {
-  movies: Array<unknown>;
-  heroImage: HeroImage | null;
+  movies: Movie[];
+  heroImage: Movie | null;
   loading: boolean;
   currentPage: number;
   totalPages: number;

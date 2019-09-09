@@ -6,11 +6,11 @@ import MovieThumb from "../components/MovieThumb";
 import SearchBar from "../components/SearchBar";
 import Spinner from "../components/Spinner";
 import { API_KEY, API_URL } from "../config";
-import { fromRMDB_toHeroImage } from "../utils/conversions";
+import { fromRMDBMovie_toMovie } from "../utils/conversions";
 
 export default class Home extends Component<{}, HomeState> {
   state = {
-    movies: [],
+    movies: [] as Movie[],
     heroImage: null,
     loading: false,
     currentPage: 0,
@@ -25,10 +25,10 @@ export default class Home extends Component<{}, HomeState> {
       .then(result => result.json())
       .then(result => {
         this.setState({
-          movies: [...movies, ...result.results],
+          movies: [...movies, ...result.results.map(fromRMDBMovie_toMovie)],
           heroImage:
             !heroImage && result.results.length
-              ? fromRMDB_toHeroImage(result.results[0])
+              ? fromRMDBMovie_toMovie(result.results[0])
               : heroImage,
           loading: false,
           currentPage: result.page,
@@ -74,7 +74,7 @@ export default class Home extends Component<{}, HomeState> {
   }
 
   render() {
-    const { heroImage, loading } = this.state;
+    const { heroImage, loading, movies, searchTerm } = this.state;
     return (
       <div className="home">
         {heroImage ? (
@@ -83,8 +83,14 @@ export default class Home extends Component<{}, HomeState> {
           </div>
         ) : null}
         <SearchBar doSearch={this.searchItems} />
-        <FourColGrid />
-        <MovieThumb />
+        <FourColGrid
+          header={searchTerm ? "Search Result" : "Popular Movies"}
+          loading={loading}
+        >
+          {movies.map(movie => (
+            <MovieThumb key={movie.id} image={movie.poster} />
+          ))}
+        </FourColGrid>
         {loading ? <Spinner /> : null}
         <LoadMoreBtn />
       </div>
