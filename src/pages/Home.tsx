@@ -51,6 +51,22 @@ export default class Home extends Component<{}, HomeState> {
     this.fetchItems(endpoint);
   };
 
+  searchItems = (searchTerm: string) => {
+    let endpoint = "";
+    this.setState({
+      movies: [],
+      loading: true,
+      searchTerm
+    });
+
+    if (searchTerm === "") {
+      endpoint = `${API_URL}movie/popular?api_key=${API_KEY}&language=en-US&page=1`;
+    } else {
+      endpoint = `${API_URL}search/movie?api_key=${API_KEY}&language=en-US&query=${searchTerm}`;
+    }
+    this.fetchItems(endpoint);
+  };
+
   componentDidMount() {
     const endpoint = `${API_URL}movie/popular?api_key=${API_KEY}&language=en-US&page=1`;
     this.setState({ loading: true });
@@ -66,7 +82,7 @@ export default class Home extends Component<{}, HomeState> {
             <HeroImage {...heroImage!} />
           </div>
         ) : null}
-        <SearchBar />
+        <SearchBar doSearch={this.searchItems} />
         <FourColGrid />
         <MovieThumb />
         {loading ? <Spinner /> : null}
