@@ -42,7 +42,7 @@ export default class Home extends Component<{}, HomeState> {
     const { searchTerm, currentPage } = this.state;
 
     this.setState({ loading: true });
-    const endpoint = searchTerm
+    const endpoint = !searchTerm
       ? `${API_URL}movie/popular?api_key=${API_KEY}&language=en-US&page=${currentPage +
           1}`
       : `${API_URL}search/movie?api_key=${API_KEY}&language=en-US&query=${searchTerm}&page=${currentPage +
@@ -74,7 +74,14 @@ export default class Home extends Component<{}, HomeState> {
   }
 
   render() {
-    const { heroImage, loading, movies, searchTerm } = this.state;
+    const {
+      currentPage,
+      heroImage,
+      loading,
+      movies,
+      searchTerm,
+      totalPages
+    } = this.state;
     return (
       <div className="home">
         {heroImage ? (
@@ -92,7 +99,9 @@ export default class Home extends Component<{}, HomeState> {
           ))}
         </FourColGrid>
         {loading ? <Spinner /> : null}
-        <LoadMoreBtn />
+        {currentPage <= totalPages && !loading ? (
+          <LoadMoreBtn text="Load More" handleLoadMore={this.loadMoreItems} />
+        ) : null}
       </div>
     );
   }

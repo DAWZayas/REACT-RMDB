@@ -12,6 +12,6 @@ $default-font-size: 1.6rem;
 
 // GRID
 $cols: 12;
-$grid-width: 114rem;
+$grid-width: $viewport-width * 0.8;
 $gutter-vertical: 8rem;
 $gutter-horizontal: 6rem;

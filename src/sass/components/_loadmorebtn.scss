@@ -1,0 +1,20 @@
+.loadmorebtn {
+  background: $color-primary-green;
+  width: 100%;
+  min-height: 5rem;
+  text-align: center;
+  color: $color-primary-white;
+  cursor: pointer;
+  transition: all 0.3s;
+  border-radius: 2rem;
+
+  p {
+    font-family: 'Abel', sans-serif;
+    font-size: 4.2rem;
+    padding: 2rem;
+  }
+
+  &:hover {
+    opacity: 0.8;
+  }
+}
